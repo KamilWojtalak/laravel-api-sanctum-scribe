@@ -1,0 +1,680 @@
+openapi: 3.0.3
+info:
+  title: 'Test title for docs'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/v1/login:
+    post:
+      summary: Login
+      operationId: login
+      description: "Authenticates the user and returns the user's API token."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    token: '{YOUR_TOKEN_HERE}'
+                  message: Authenticated
+                  status: 200
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: '{YOUR_TOKEN_HERE}'
+                  message:
+                    type: string
+                    example: Authenticated
+                  status:
+                    type: integer
+                    example: 200
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The password field is required.'
+                  errors:
+                    password:
+                      - 'The password field is required.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The password field is required.'
+                  errors:
+                    type: object
+                    properties:
+                      password:
+                        type: array
+                        example:
+                          - 'The password field is required.'
+                        items:
+                          type: string
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: prodriguez@example.org
+                password:
+                  type: string
+                  description: ''
+                  example: odit
+              required:
+                - email
+                - password
+      security: []
+  /api/v1/register:
+    post:
+      summary: Register
+      operationId: register
+      description: "Registers the user and returns the user's API token."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: 'Example success response'
+                properties:
+                  data:
+                    type: string
+                    example: 'Example success response'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors: 'Example error response'
+                properties:
+                  errors:
+                    type: string
+                    example: 'Example error response'
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: augustine00@example.org
+                password:
+                  type: string
+                  description: ''
+                  example: autem
+              required:
+                - email
+                - password
+      security: []
+  /api/v1/logout:
+    post:
+      summary: Logout
+      operationId: logout
+      description: 'Logouts the user'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: 'Example success response'
+                properties:
+                  data:
+                    type: string
+                    example: 'Example success response'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors: 'Example error response'
+                properties:
+                  errors:
+                    type: string
+                    example: 'Example error response'
+      tags:
+        - Authentication
+  /api/v1/tickets:
+    get:
+      summary: Index
+      operationId: index
+      description: '<example description>'
+      parameters:
+        -
+          in: query
+          name: sort
+          description: 'Data field(s) to sort by. Seperate multiple fields with commas. Denote descending sort with a minus sign.'
+          example: 'title,-createdAt'
+          required: false
+          schema:
+            type: string
+            description: 'Data field(s) to sort by. Seperate multiple fields with commas. Denote descending sort with a minus sign.'
+            example: 'title,-createdAt'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: 'Example success response'
+                properties:
+                  data:
+                    type: string
+                    example: 'Example success response'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors: 'Example error response'
+                properties:
+                  errors:
+                    type: string
+                    example: 'Example error response'
+      tags:
+        - Tickets
+    post:
+      summary: store
+      operationId: store
+      description: '<example description>'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: 'Example success response'
+                properties:
+                  data:
+                    type: string
+                    example: 'Example success response'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors: 'Example error response'
+                properties:
+                  errors:
+                    type: string
+                    example: 'Example error response'
+      tags:
+        - Tickets
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    attributes:
+                      type: object
+                      description: ''
+                      example: []
+                      properties:
+                        title:
+                          type: string
+                          description: ''
+                          example: qui
+                        description:
+                          type: string
+                          description: ''
+                          example: et
+                        status:
+                          type: string
+                          description: ''
+                          example: X
+                          enum:
+                            - A
+                            - C
+                            - H
+                            - X
+                    relationships:
+                      type: object
+                      description: ''
+                      example: []
+                      properties:
+                        author:
+                          type: object
+                          description: ''
+                          example: []
+                          properties:
+                            data:
+                              type: object
+                              description: ''
+                              example: []
+                              properties:
+                                id:
+                                  type: integer
+                                  description: ''
+                                  example: 19
+  '/api/v1/tickets/{id}':
+    get:
+      summary: show
+      operationId: show
+      description: '<example description>'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: 'Example success response'
+                properties:
+                  data:
+                    type: string
+                    example: 'Example success response'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors: 'Example error response'
+                properties:
+                  errors:
+                    type: string
+                    example: 'Example error response'
+      tags:
+        - Tickets
+    put:
+      summary: update
+      operationId: update
+      description: '<example description>'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: 'Example success response'
+                properties:
+                  data:
+                    type: string
+                    example: 'Example success response'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors: 'Example error response'
+                properties:
+                  errors:
+                    type: string
+                    example: 'Example error response'
+      tags:
+        - Tickets
+    delete:
+      summary: destroy
+      operationId: destroy
+      description: '<example description>'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: 'Example success response'
+                properties:
+                  data:
+                    type: string
+                    example: 'Example success response'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors: 'Example error response'
+                properties:
+                  errors:
+                    type: string
+                    example: 'Example error response'
+      tags:
+        - Tickets
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the ticket.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/api/v1/tickets/{ticket':
+    put:
+      summary: replace
+      operationId: replace
+      description: '<example description>'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: 'Example success response'
+                properties:
+                  data:
+                    type: string
+                    example: 'Example success response'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors: 'Example error response'
+                properties:
+                  errors:
+                    type: string
+                    example: 'Example error response'
+      tags:
+        - Tickets
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    attributes:
+                      type: object
+                      description: ''
+                      example: []
+                      properties:
+                        title:
+                          type: string
+                          description: ''
+                          example: harum
+                        description:
+                          type: string
+                          description: ''
+                          example: quibusdam
+                        status:
+                          type: string
+                          description: ''
+                          example: X
+                          enum:
+                            - A
+                            - C
+                            - H
+                            - X
+                    relationships:
+                      type: object
+                      description: ''
+                      example: []
+                      properties:
+                        author:
+                          type: object
+                          description: ''
+                          example: []
+                          properties:
+                            data:
+                              type: object
+                              description: ''
+                              example: []
+                              properties:
+                                id:
+                                  type: integer
+                                  description: ''
+                                  example: 4
+  /api/v1/users:
+    get:
+      summary: index
+      operationId: index
+      description: '<example description>'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: 'Example success response'
+                properties:
+                  data:
+                    type: string
+                    example: 'Example success response'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors: 'Example error response'
+                properties:
+                  errors:
+                    type: string
+                    example: 'Example error response'
+      tags:
+        - Users
+    post:
+      summary: store
+      operationId: store
+      description: '<example description>'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: 'Example success response'
+                properties:
+                  data:
+                    type: string
+                    example: 'Example success response'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors: 'Example error response'
+                properties:
+                  errors:
+                    type: string
+                    example: 'Example error response'
+      tags:
+        - Users
+  '/api/v1/users/{id}':
+    get:
+      summary: show
+      operationId: show
+      description: '<example description>'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: 'Example success response'
+                properties:
+                  data:
+                    type: string
+                    example: 'Example success response'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors: 'Example error response'
+                properties:
+                  errors:
+                    type: string
+                    example: 'Example error response'
+      tags:
+        - Users
+    put:
+      summary: update
+      operationId: update
+      description: '<example description>'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: 'Example success response'
+                properties:
+                  data:
+                    type: string
+                    example: 'Example success response'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors: 'Example error response'
+                properties:
+                  errors:
+                    type: string
+                    example: 'Example error response'
+      tags:
+        - Users
+    delete:
+      summary: destroy
+      operationId: destroy
+      description: '<example description>'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: 'Example success response'
+                properties:
+                  data:
+                    type: string
+                    example: 'Example success response'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors: 'Example error response'
+                properties:
+                  errors:
+                    type: string
+                    example: 'Example error response'
+      tags:
+        - Users
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the user.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Authentication
+    description: ''
+  -
+    name: Tickets
+    description: ''
+  -
+    name: Users
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: 'You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.'
+security:
+  -
+    default: []
